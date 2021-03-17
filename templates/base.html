@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clays Music</title>
+
+    <!-- font awesome offline libraries -->
+    <link rel="stylesheet" href="{% static 'assets/libraries/fontawesome-free-5.15.2-web/css/all.css' %}">
+
+     <!-- bootstrap 5.0 offline libraries -->
+     <link rel="stylesheet" href="{% static 'assets/libraries/bootstrap-5.0.0-beta2-dist/css/bootstrap.min.css' %}">
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+</head>
+<body>
+    <header class="">
+        <div class="">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white">
+               <div class="container-fluid">
+                    <a href="{% url 'main:home' %}" class="navbar-brand">Clays Music</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#navbarSupportedContent" 
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                            <li class="nav-item active">
+                                <a href="{% url 'main:home' %}" class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link">Trending</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="" class="nav-link dropdown-toggle"
+                                    id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false"
+                                    >Listen</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a href="" class="dropdown-item">Slow</a></li>
+                                    <li><a href="" class="dropdown-item">Fast</a></li>
+                                    <li><a href="" class="dropdown-item">Medium</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="d-flex" method="GET">
+                            <input type="text" name="" id="" class="form-control me-2"
+                            placeholder="search" aria-label="Search">
+                            <button class="btn btn-outline-primary">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                        <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                            <li class="nav-item active">
+                                <a href="" class="nav-link">Become a Creator</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link">Upload</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+               </div>
+            </nav>
+        </div>
+    </header>
+
+
+
+    {% block content %}
+    {% endblock %}
+
+    
+    <footer class="footer">
+        <div class="footer-items">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-3">
+                        <ul class="footer-nav">
+                            <li class="footer-item">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#">Contact</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#">About</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#">Download</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#">Login</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#">Sign Up</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-3">
+                        <ul class="footer-nav">
+                            <li class="footer-item">
+                                <a href="#">Home</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#">Contact</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#">About</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#">Download</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#">Login</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="#">Sign Up</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+            </div>
+            <p class="copyright">&copy; Clays Music&trade; 2021.</p>
+        </div>
+    </footer>
+
+    <!-- online link fo jquery-->
+    <!-- <link rel="stylesheet" href="http://jquery.com/jquery-wp-content/themes/jquery/css/base.css?v=1"> -->
+
+    <!-- offline jquery -->
+    <script src="{% static 'assets/libraries/jquery-3.5.1.js' %}"></script>
+
+    
+    <!-- offline bootstrap js -->
+    <script src="{% static 'assets/libraries/bootstrap-5.0.0-beta2-dist/js/bootstrap.min.js' %}"></script>
+    
+    <!-- custom javascript -->
+    <script src="{% static 'assets/js/app.js' %}" type="text/javascript"></script>
+
+</body>
+</html>

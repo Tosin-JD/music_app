@@ -1,0 +1,11 @@
+{% extends 'tracks/song_base.html' %}
+
+{% block song_content %}
+    <div class="">
+        {% for track in track_list %}
+            <li>{{ track.title }}</li>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+

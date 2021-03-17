@@ -1,0 +1,15 @@
+
+.all-font{
+    background-color: yellowgreen;
+    font-size: 2rem;
+}
+
+.song-cover{
+    background-color: #ccc;
+    height: 10vh;
+    width: 100%;
+    min-width: 12vw;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
