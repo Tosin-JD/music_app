@@ -42,9 +42,9 @@
                                     data-bs-toggle="dropdown" aria-expanded="false"
                                     >Listen</a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a href="" class="dropdown-item">Slow</a></li>
-                                    <li><a href="" class="dropdown-item">Fast</a></li>
-                                    <li><a href="" class="dropdown-item">Medium</a></li>
+                                    <li><a href="" class="dropdown-item">Category 1</a></li>
+                                    <li><a href="" class="dropdown-item">Category 2</a></li>
+                                    <li><a href="" class="dropdown-item">Category 3</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -57,10 +57,10 @@
                         </form>
                         <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                             <li class="nav-item active">
-                                <a href="" class="nav-link">Become a Creator</a>
+                                <a href="{% url 'accounts:sign_up' %}" class="nav-link">Become a Creator</a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">Upload</a>
+                                <a href="{% url 'tracks:create' %}" class="nav-link">Upload</a>
                             </li>
                         </ul>
                     </div>
@@ -72,7 +72,7 @@
 
 
 
-    {% block content %}
+    {% block main_content %}
     {% endblock %}
 
     

@@ -1,4 +1,4 @@
-{% extends 'accounts/base.html' %}
+{% extends 'accounts/accounts_base.html' %}
 
 {% block account_content %}
     <h2>Account Sign Up Page</h2>
@@ -34,11 +34,9 @@
                                 {{ field }}
                             </div>
                         {% endfor %}
-                        <div class="tad">
-                            <input type="checkbox" name="term_and_cond">
-                            By Signing up you agree to the terms of and condition
-                            of Clays music.
-                        </div>
+                            <p>By Signing up you agree to the terms of and condition
+                                of Clays music.
+                            </p>
                         <input type="submit" value="Sign Up" 
                         class="btn btn-primary form-control">
                         

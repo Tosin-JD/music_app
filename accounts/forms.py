@@ -26,7 +26,7 @@ class UserCreationForm(forms.ModelForm):
         
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name', 'website', 'profile_pic')
+        fields = ('email', 'first_name', 'last_name', 'website', 'profile_pic', 'agree')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -44,3 +44,16 @@ class UserCreationForm(forms.ModelForm):
             user.save()
         return user
 
+
+class UserUpdateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(UserUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].widget.attrs.update({'class': 'form-control'})
+        self.fields['last_name'].widget.attrs.update({'class': 'form-control'})
+        self.fields['email'].widget.attrs.update({'class': 'form-control'})
+        self.fields['website'].widget.attrs.update({'class': 'form-control'})
+        self.fields['profile_pic'].widget.attrs.update({'class': 'form-control'})
+        
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'website', 'profile_pic', 'agree')

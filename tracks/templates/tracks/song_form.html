@@ -14,6 +14,22 @@
                         {% endfor %}
                     {% endif %}
                 </div>
+                <div class="">
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                                {{ message }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                
+                {{ form }}
+                
+                {# <!--
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="mx-1 my-1">
@@ -31,14 +47,14 @@
                             </div>
                             <div class="form-group">
                                 <dl>
-                                    <label>{{ form.audio_file.label_tag }}</label><br>
-                                    {{ form.audio_file }}
+                                    <label>{{ form.song_cover.label_tag }}</label><br>
+                                    {{ form.song_cover }}
                                 </dl>
                             </div>
                             <div class="form-group">
                                 <dl>
-                                    <label>{{ form.song_cover.label_tag }}</label><br>
-                                    {{ form.song_cover }}
+                                    <label>{{ form.audio_file.label_tag }}</label><br>
+                                    {{ form.audio_file }}
                                 </dl>
                             </div>
                         </div>
@@ -75,7 +91,8 @@
                         </div>
                     </div>
                 </div>
-                
+                -->
+                #}
                 <input type="submit" value="Upload" class="btn btn-primary form-control" />
         
             </div>

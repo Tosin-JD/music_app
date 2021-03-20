@@ -1,5 +1,7 @@
+import uuid
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 from . import custom_models
 from django.utils.text import slugify
 
@@ -8,33 +10,42 @@ User = get_user_model()
 
 # Create your models here.
 class Album(models.Model):
+    unique_num = models.CharField(max_length=1024)
     uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=1024)
     album_cover = models.ImageField(upload_to='album_cover/')
     artiste = models.CharField(max_length=50)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField()
     timestamp = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return '{} by {}'.format(self.title, self.user)
+        return '{} by {}'.format(self.title, self.uploaded_by)
+        
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            slug_item = '{} {}'.format(self.title, self.unique_num)
+            self.slug = slugify(slug_item)
+        super().save(*args, **kwargs)
+    
 
 
 class Track(models.Model):
+    unique_num = models.UUIDField(default=uuid.uuid4, unique=True)
     uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     artiste = models.CharField(max_length=50)
     lyric = models.TextField(verbose_name='Lyrics', blank=True, null=True)
     genre = models.CharField(max_length=20)
     description = models.CharField(max_length=1024)
-    audio_file = custom_models.AudioFileField(upload_to='tracks/')
     song_cover = models.ImageField(upload_to='song_covers/')
+    audio_file = custom_models.AudioFileField(upload_to='tracks/')
     likes = models.PositiveIntegerField(default=0)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField()
     timestamp = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return '{} by {}'.format(self.title, self.user)
+        return '{} by {}'.format(self.title, self.uploaded_by)
 
     def get_likes(self):
         """
@@ -42,10 +53,35 @@ class Track(models.Model):
         Return: the total likes for a song
         """
         return self.likes
+    
+    def increase_like(self):
+        """
+        Parameter: self
+        Return: the total likes for a song
+        """
+        self.likes += 1
+        self.save()
+    
+    def decrease_like(self):
+        """
+        Parameter: self
+        Return: the total likes for a song
+        """
+        self.likes -= 1
+        self.save()
+    
+    def get_absolute_url(self):
+        return reverse('tracks', kwargs={'slug': self.slug})
+    
+    def size(self):
+        audio_size = int(self.audio_file.size)/ (1024 * 1024)
+        audio_size = int(audio_size)
+        return '{}mb'.format(audio_size)
         
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify
+            slug_item = '{} {}'.format(self.title, self.unique_num)
+            self.slug = slugify(slug_item)
         super().save(*args, **kwargs)
     
 class AlbumTrack(Track):

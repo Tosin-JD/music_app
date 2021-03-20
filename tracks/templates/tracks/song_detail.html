@@ -1,0 +1,13 @@
+<img src="{{ object.song_cover.url }}" alt="" />
+
+{{ object.title }}
+
+{{ object.artiste }}
+<audio controls>
+    <source src="{{ object.audio_file.url }}" type="audio/mp3" />
+</audio>
+{{ object.description }}
+
+{{ object.get_likes }}
+
+

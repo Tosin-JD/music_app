@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.utils.text import slugify
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser,
 )
@@ -58,6 +59,7 @@ class User(AbstractBaseUser):
                                     blank=True,
                                     null=True
                                 )
+    agree = models.BooleanField(default=False, verbose_name='Agree to terms and Condition')
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     objects = UserManager()
@@ -66,10 +68,10 @@ class User(AbstractBaseUser):
     def __str__(self):
         return self.email
 
-    def save(self):
+    def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.user_id, allow_unicode=True)
-        super().save()
+        super().save(*args, **kwargs)
         
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"

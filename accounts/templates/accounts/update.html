@@ -1,0 +1,66 @@
+{% extends 'accounts/accounts_base.html' %}
+
+{% block account_content %}
+    <h2>Account Sign Up Page</h2>
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-5">
+                {% if form.is_multipart %}
+                <form method="POST" enctype="multipart/form-data">
+                {% else %}
+                <form method="POST">
+                {% endif %}
+                
+                    {% csrf_token %}
+                    <div class="sign-up">
+                        <div class="form-error">
+                            {% if form.errors %}
+                                {% for er in form.errors %}
+                                    <p class="text-danger">
+                                        {{ er }}
+                                    </p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        {% for field in form %}
+                            <div class="form-group">
+                                <div class="help_text">{{ field.help_text }}</div>
+                                <label>{{ field.label_tag }}</label>
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                        <input type="submit" value="Sign Up" 
+                        class="btn btn-primary form-control">
+                        
+                        <div>
+                            <a class="log-text" href="{% url 'accounts:login' %}">
+                                Already signed up? Login
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+    
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,8 +9,8 @@ urlpatterns = [
     path('sign-up/', SignUp.as_view(), name='sign_up'),
     path('profile/', Profile.as_view(), name='profile'),
     path('login/',
-             auth_views.LoginView.as_view(template_name='accounts/login.html'), 
-            name='login'
+         auth_views.LoginView.as_view(template_name='accounts/login.html'), 
+        name='login'
         ),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]

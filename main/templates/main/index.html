@@ -34,191 +34,65 @@
                     </aside>
                 </div>
                 <div class="col-sm-8">
-                    <div class="row">
-                        <!-- start a single song -->
-                        <div class="col-lg-3 col-md-4">
-                            <div class="mb-3 mr-3">
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-6 col-6">
-                                        <div>
-                                            <img src="{% static 'assets/img/second.jpg' %}" 
-                                                alt="Song Cover" class="img-fluid rounded song-img">
+                    {% for track in latest_tracks %}
+                        <div class="row">
+                            <!-- start a single song -->
+                            <div class="col-lg-3 col-md-4">
+                                <div class="mb-3 mr-3">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-6 col-6">
+                                            <div>
+                                                <img src="{{ track.song_cover.url }}" 
+                                                    alt="Song Cover" class="img-fluid rounded song-img">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-6 col-6 mt-3">
-                                        <div class="song-details">
-                                            <audio>
-                                                <source class="song-src" id="song-src" 
-                                                src="{% static 'assets/audio/08. All Things New.mp3' %}" 
-                                                type="audio/mp3">
-                                            </audio>     
-                                                <h5 class="song-title">Song Title</h5>
-                                                <h5 class="song-artiste">Song Artiste</h5>
+                                        <div class="col-lg-12 col-md-12 col-sm-6 col-6 mt-3">
+                                            <div class="song-details">
+                                                <audio controls>
+                                                    <source class="song-src" id="song-src" 
+                                                    src="{{ track.audio_file.url }}" 
+                                                    type="audio/mp3">
+                                                </audio>
+                                                    <h5 class="song-title">{{ track.title }}</h5>
+                                                    <h5 class="song-artiste">{{ track.artiste }}</h5>
+                                                    
+                                                    <div class="row song-meta">
+                                                        <div class="col-3">
+                                                            <p class="song-size">{{ track.size }}</p>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <time class="time song-duration"></time>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <span class="song-play-pause" id="play-song">
+                                                                <i class="fas fa-play play-song"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <a href="{% url 'tracks:like' track.slug %}" class="song-like">
+                                                                <i class="fas fa-heart like-song"> {{ track.get_likes }}</i>
+                                                            </a>
+                                                        </div>
+                                                        <a class="" href="{% url 'tracks:detail' track.slug %}">Detail</a>
+                                                    </div>
                                                 
-                                                <div class="row song-meta">
-                                                    <div class="col-3">
-                                                        <p class="song-size">5mb</p>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <time class="time song-duration">4:55</time>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <span class="song-play-pause" id="play-song">
-                                                            <i class="fas fa-play play-song"></i>
-                                                        </span>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <span class="song-like">
-                                                            <i class="fas fa-heart like-song"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                             <!-- end single song -->
                         </div>
-                         <!-- end single song -->
-                         <!-- start a single song -->
-                        <div class="col-lg-3 col-md-4">
-                            <div class="mb-3 mr-3">
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-6 col-6">
-                                        <div>
-                                            <img src="{% static 'assets/img/second.jpg' %}" 
-                                                alt="Song Cover" class="img-fluid rounded song-img">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-6 col-6 mt-3">
-                                        <div class="song-details">
-                                            <audio>
-                                                <source class="song-src" id="song-src" 
-                                                src="{% static 'assets/audio/11 We The Redeemed.mp3' %}" 
-                                                type="audio/mp3">
-                                            </audio>     
-                                                <h5 class="song-title">Song Title</h5>
-                                                <h5 class="song-artiste">Song Artiste</h5>
-                                                
-                                                <div class="row song-meta">
-                                                    <div class="col-3">
-                                                        <p class="song-size">5mb</p>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <time class="time song-duration">4:55</time>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <span class="song-play-pause" id="play-song">
-                                                            <i class="fas fa-play play-song"></i>
-                                                        </span>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <span class="song-like">
-                                                            <i class="fas fa-heart like-song"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    {% empty %}
+                        <div class="">
+                            <h3 class="text-dark">
+                                Oops! No item in the database yet.
+                            </h3>
+                            <p class="text-secondary">
+                                Please contact the administrator for more informaation
+                            </p>
                         </div>
-                         <!-- end single song -->
-
-                         <!-- start a single song -->
-                        <div class="col-lg-3 col-md-4">
-                            <div class="mb-3 mr-3">
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-6 col-6">
-                                        <div>
-                                            <img src="{% static 'assets/img/second.jpg' %}" 
-                                                alt="Song Cover" class="img-fluid rounded song-img">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-6 col-6 mt-3">
-                                        <div class="song-details">
-                                            <audio>
-                                                <source class="song-src" id="song-src" 
-                                                src="{% static 'assets/audio/08. Shape Of Your Heart.mp3' %}" 
-                                                type="audio/mp3">
-                                            </audio>     
-                                                <h5 class="song-title">Song Title</h5>
-                                                <h5 class="song-artiste">Song Artiste</h5>
-                                                
-                                                <div class="row song-meta">
-                                                    <div class="col-3">
-                                                        <p class="song-size">5mb</p>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <time class="time song-duration">4:55</time>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <span class="song-play-pause" id="play-song">
-                                                            <i class="fas fa-play play-song"></i>
-                                                        </span>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <span class="song-like">
-                                                            <i class="fas fa-heart like-song"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                         <!-- end single song -->
-
-                         <!-- start a single song -->
-                        <div class="col-lg-3 col-md-4">
-                            <div class="mb-3 mr-3">
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-6 col-6">
-                                        <div>
-                                            <img src="{% static 'assets/img/second.jpg' %}" 
-                                                alt="Song Cover" class="img-fluid rounded song-img">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-6 col-6 mt-3">
-                                        <div class="song-details">
-                                            <audio>
-                                                <source class="song-src" id="song-src" 
-                                                src="{% static 'assets/audio/06 Yahweh.mp3' %}" 
-                                                type="audio/mp3">
-                                            </audio>     
-                                                <h5 class="song-title">Song Title</h5>
-                                                <h5 class="song-artiste">Song Artiste</h5>
-                                                
-                                                <div class="row song-meta">
-                                                    <div class="col-3">
-                                                        <p class="song-size">5mb</p>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <time class="time song-duration">4:55</time>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <span class="song-play-pause" id="play-song">
-                                                            <i class="fas fa-play play-song"></i>
-                                                        </span>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <span class="song-like">
-                                                            <i class="fas fa-heart like-song"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                         <!-- end single song -->
-
-                    </div>
+                    {% endfor %}
                 </div>
                 <div class="col-sm-2">
                     <aside>
@@ -230,3 +104,10 @@
     </main>
 
 {% endblock %}
+
+
+
+
+
+
+

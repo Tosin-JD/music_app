@@ -129,7 +129,11 @@ const allBtnPlay = document.querySelectorAll('.song-play-pause');
 // var songToPlay;
 allBtnPlay.forEach(function(btn, index){
     const song = allSongSrc[index];
-
+    
+    alert("It is working");
+    alert(song);
+    
+        
     // the SongPlayer was instantiated outside 
     // the click eventListener sotthat there
     // will not be a new object each time the
