@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
         "https://freesong.herokuapp.com/",
-         "freesong.herokuapp.com/",
+         "freesong.herokuapp.com",
         "127.0.0.1",
         ]
 
