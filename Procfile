@@ -1,4 +1,4 @@
-web: gunicorn music_app.wsgi
+web: gunicorn music_app.wsgi —log-file -
 
 
 

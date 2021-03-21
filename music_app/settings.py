@@ -26,7 +26,11 @@ SECRET_KEY = 'sqyp#h$^%yxk$tpx1ic9)2!xrd8jbu38*!x*_86!q1_t_^^2)+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+        "https://freesong.herokuapp.com/",
+         "freesong.herokuapp.com/",
+        "127.0.0.1",
+        ]
 
 
 # Application definition
@@ -139,7 +143,7 @@ MEDIA_URL = '/media/'
 # settings for my storage of static files for whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # user model 
 AUTH_USER_MODEL = 'accounts.User'
