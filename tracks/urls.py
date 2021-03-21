@@ -7,14 +7,15 @@ from .views import (CreateTrack,
                     DeleteTrack,
                     like_unlike_song,
                     
-                    song_api,
+                    )
+from .api_views import (song_api,
                     song_detail_api,
                     TrackListAPI,
                     TrackDetailAPI,
                     TrackListCreateAPIView,
                     TrackDetailDestroyAPIView,
                     TrackViewSet,
-                    )
+                    ) 
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
