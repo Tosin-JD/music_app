@@ -10,7 +10,7 @@
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
                         <div class="hero-text">
-                            <h1 class="mx-3 my-3">
+                            <h1 class="mx-3 my-1">
                                 Trending tracks on Clays
                             </h1>
                         </div>
@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="hero-text">
-                <h1 class="mx-3 my-3">
+                <h1 class="mx-3 my-1">
                     Trending tracks on Clays
                 </h1>
             </div>
@@ -34,55 +34,63 @@
                     </aside>
                 </div>
                 <div class="col-sm-8">
-                    {% for track in latest_tracks %}
-                        <div class="row">
+                    <div class="row">
+                    {% for track in object_list %}
+                       
                             <!-- start a single song -->
-                            <div class="col-lg-3 col-md-4">
+                            <div class="col-lg-3 col-md-4">                                    
                                 <div class="mb-3 mr-3">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-6">
-                                            <div>
-                                                <img src="{{ track.song_cover.url }}" 
-                                                    alt="Song Cover" class="img-fluid rounded song-img">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-6 col-6">
+                                                <div>
+                                                    <a href="{% url 'tracks:single' track.slug %}">
+                                                        <img src="{{ track.get_image_url }}" 
+                                                            alt="Song Cover" class="img-fluid rounded song-img">
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-6 mt-3">
-                                            <div class="song-details">
-                                                <audio controls>
-                                                    <source class="song-src" id="song-src" 
-                                                    src="{{ track.audio_file.url }}" 
-                                                    type="audio/mp3">
-                                                </audio>
-                                                    <h5 class="song-title">{{ track.title }}</h5>
-                                                    <h5 class="song-artiste">{{ track.artiste }}</h5>
+                                            <div class="col-lg-12 col-md-12 col-sm-6 col-6 mt-3">
+                                                <div class="song-details">
+                                                    <audio preload="metadata">
+                                                        <source class="song-src" id="song-src" 
+                                                        src="{{ track.get_audio_url }}" 
+                                                        type="audio/mp3">
+                                                    </audio>
+                                                        <h5 class="song-title">{{ track.title }}</h5>
+                                                        <h5 class="song-artiste">{{ track.artiste }}</h5>
+                                                        
+                                                        <div class="row song-meta">
+                                                            <div class="col-5">
+                                                                <p class="song-size">{{ track.get_audio_size }}<small>mb</small></p>
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <time class="time song-duration">{{ track.get_audio_duration }}</time>
+                                                            </div>
+                                                            <div class="col-2">
+                                                                <span class="song-play-pause" id="play-song">
+                                                                    <i class="fas fa-play play-song"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-2">
+                                                                <a href="" class="song-like">
+                                                                    <i class="fas fa-thumbs-up like-song"></i>
+                                                                </a>
+                                                            </div>
+                                                            
+                                                        </div>
                                                     
-                                                    <div class="row song-meta">
-                                                        <div class="col-3">
-                                                            <p class="song-size">{{ track.size }}</p>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <time class="time song-duration"></time>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <span class="song-play-pause" id="play-song">
-                                                                <i class="fas fa-play play-song"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <a href="{% url 'tracks:like' track.slug %}" class="song-like">
-                                                                <i class="fas fa-heart like-song"> {{ track.get_likes }}</i>
-                                                            </a>
-                                                        </div>
-                                                        <a class="" href="{% url 'tracks:detail' track.slug %}">Detail</a>
-                                                    </div>
-                                                
+                                                </div>
+                                            
+                                                <div class="col-12 pb-container">
+                                                    <div class="progressbar"></div>
+                                                </div>
+                                            
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                             </div>
                              <!-- end single song -->
-                        </div>
+                        
                     {% empty %}
                         <div class="">
                             <h3 class="text-dark">
@@ -93,6 +101,7 @@
                             </p>
                         </div>
                     {% endfor %}
+                    </div>
                 </div>
                 <div class="col-sm-2">
                     <aside>

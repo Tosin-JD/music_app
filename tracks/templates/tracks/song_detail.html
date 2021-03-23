@@ -4,7 +4,7 @@
 
 {{ object.artiste }}
 <audio controls>
-    <source src="{{ object.audio_file.url }}" type="audio/mp3" />
+    <source src="{{ object.get_audio_url }}" type="audio/mp3" />
 </audio>
 {{ object.description }}
 

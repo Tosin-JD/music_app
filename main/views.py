@@ -3,7 +3,7 @@ from django.views import generic
 from tracks.models import Track
 
 # Create your views here.
-class HomePage(generic.TemplateView):
+class HomePage(generic.ListView):
     model = Track
     template_name = 'main/index.html'
 

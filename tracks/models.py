@@ -1,3 +1,4 @@
+import os
 import uuid
 from django.db import models
 from django.contrib.auth import get_user_model
@@ -35,17 +36,37 @@ class Track(models.Model):
     uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     artiste = models.CharField(max_length=50)
-    lyric = models.TextField(verbose_name='Lyrics', blank=True, null=True)
     genre = models.CharField(max_length=20)
     description = models.CharField(max_length=1024)
     song_cover = models.ImageField(upload_to='song_covers/')
     audio_file = custom_models.AudioFileField(upload_to='tracks/')
     likes = models.PositiveIntegerField(default=0)
-    slug = models.SlugField()
+    slug = models.SlugField(blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return '{} by {}'.format(self.title, self.uploaded_by)
+
+    def get_audio_url(self):
+        try:
+            audio_url = self.audio_file.url
+            os.path.exists(audio_url)
+        except IOError:
+            print("File not found")
+        return audio_url
+    
+    def get_audio_size(self):
+        if self.audio_file.size:
+            return format(self.audio_file.size, '.2f')
+        return
+
+    def get_audio_duration(self):
+        if self.audio_file.duration:
+            return self.audio_file.duration
+        return None
+
+    def get_image_url(self):
+        return self.song_cover.url
 
     def get_likes(self):
         """

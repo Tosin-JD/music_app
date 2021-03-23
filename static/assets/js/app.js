@@ -28,7 +28,7 @@ removeOverlayScreen.addEventListener('click', function(){
 // at the same time
 var OnlySong = function(song){
     var instance;
-
+    
     function createSong(){
         // get the source of the song
         const newSong = new Audio(song.src);
@@ -48,6 +48,8 @@ var isAnyPlaying = false;
 var currentlyPlaying;
 var previouslyPlaying;
 
+
+
 class SongPlayer{
     constructor(song){
         this.testSong = song;
@@ -55,20 +57,28 @@ class SongPlayer{
         this.currentSong = this.songInstance.getInstance();
         this.isPlaying = false;
         this.parentDiv = this.getParentDiv();
+        this.ancestorDiv = this.getAncestorDiv();
+        this.progressBarElement = this.getProgressBarElement();
         this.playIcon = this.getPlayIconElement();
-        this.songDuration = this.parentDiv.querySelector('.song-duration');
-
-        // remove all the child node from totalDuration element
-        while (this.songDuration.hasChildNodes()) {
-            this.songDuration.removeChild(this.songDuration.lastChild);
-        }
-        this.songDuration.appendChild(this.currentSong.duration);
+         
     }
     getParentDiv(){
         return this.testSong.parentNode.parentNode;
     }
+    getAncestorDiv(){
+        return this.testSong.parentNode.parentNode.parentNode;
+    }
     getPlayIconElement(){
         return this.parentDiv.querySelector('.play-song');
+    }
+    getProgressBarElement(){
+        return this.ancestorDiv.querySelector('.progressbar');
+    }
+    getDurationElement(){
+        return this.parentDiv.querySelector('.song-duration');
+    }
+    getDuration(){
+        return this.getDurationElement().textNode;
     }
     play(){ 
         /* this is a private function 
@@ -78,7 +88,7 @@ class SongPlayer{
         this.playIcon.classList.add('fa-pause');
         this.playIcon.classList.remove('fa-play');
         this.playIcon.classList.remove('fa-stop');
-        console.log(this.totalDuration);
+        
     }
     pause(){
         /* this is a private function 
@@ -87,7 +97,8 @@ class SongPlayer{
         this.isPlaying = false;
         this.playIcon.classList.add('fa-play');
         this.playIcon.classList.remove('fa-pause');
-        this.playIcon.classList.remove('fa-stop');
+        this.playIcon.classList.remove('fa-stop'); 
+        
     }
     stop(){
         /* this is a public function that can
@@ -103,6 +114,8 @@ class SongPlayer{
             // this.playIcon.classList.add('fa-stop');
             this.playIcon.classList.add('fa-play');
             this.playIcon.classList.remove('fa-pause');
+            this.currentSong.preload = 'metadata'
+
         }
     }
     playpause(){
@@ -111,27 +124,64 @@ class SongPlayer{
         }else{
             this.pause();
         }
+
+        animateProgressBar(
+                this.progressBarElement, 
+                this.currentSong
+            );
+
+        console.log(this.currentSong.currentTime);
+        console.log(this.currentSong.duration);
+
+        console.log(this.getProgressBarElement());
+        
     }
 } // end SongPlayer
 
+
+function animateProgressBar(elem, currentSong){
+    let progressCounter = 0;
+
+    if (progressCounter == 0) {
+        progressCounter = 1;
+        var elem = elem;
+        var width = 1;
+        var id = setInterval(frame, 100);
+        
+        function frame() {
+            width = (currentSong.currentTime/ currentSong.duration) * 100;
+            elem.style.width = width + "%";
+        }
+    }
+
+}
+
+
 function songIterator(start, end, step){
     nextSong;
-    iterator = 1;
-    
+    iterator = 1;  
 }
 
 const allSongSrc = document.querySelectorAll('.song-src');
 allSongSrc.forEach(function(song, index){
     
 });
+
+allSongSrc.forEach(function(song){
+
+    audio = new Audio(song.src);
+   
+    
+});
+
+
 const allBtnPlay = document.querySelectorAll('.song-play-pause');
+
+console.log(allBtnPlay);
 
 // var songToPlay;
 allBtnPlay.forEach(function(btn, index){
     const song = allSongSrc[index];
-    
-    alert("It is working");
-    alert(song);
     
         
     // the SongPlayer was instantiated outside 
@@ -168,7 +218,8 @@ allBtnPlay.forEach(function(btn, index){
     });
 });
 
-/* end play song */
+
+
 
 
 

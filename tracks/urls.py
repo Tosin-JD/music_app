@@ -27,7 +27,8 @@ urlpatterns = [
         path('create/', CreateTrack.as_view(), name='create'),
         path('update/<slug>/', UpdateTrack.as_view(), name='update'),
         path('list/', TrackList.as_view(), name='list'),
-        path('single/<slug>/', TrackDetail.as_view(), name='detail'),
+        path('single/<slug>/', TrackDetail.as_view(), name='single'),
+        path('detail/<pk>/', TrackDetail.as_view(), name='detail'),
         path('delete/<slug>/', DeleteTrack.as_view(), name='delete'),
         path('like/<slug>/', like_unlike_song, name='like'),
         

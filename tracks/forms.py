@@ -11,7 +11,6 @@ class TrackForm(ModelForm):
         self.fields['title'].widget.attrs.update({'class':'form-control'})
         self.fields['artiste'].widget.attrs.update({'class':'form-control'})
         self.fields['genre'].widget.attrs.update({'class':'form-control'})
-        self.fields['lyric'].widget.attrs.update({'class':'form-control'})
         self.fields['description'].widget.attrs.update({'class':'form-control'})
         self.fields['audio_file'].widget.attrs.update({'class':'form-control'})
         self.fields['song_cover'].widget.attrs.update({'class':'form-control'})
@@ -21,7 +20,6 @@ class TrackForm(ModelForm):
         fields = ('title', 
                   'artiste',
                   'genre',
-                  'lyric',
                   'description',
                   'audio_file',
                   'song_cover'

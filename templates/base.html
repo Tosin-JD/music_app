@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clays Music</title>
 
+    <!-- favicon icon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'custom/img/logo/clays_logo.png'  %}"/>
+
     <!-- font awesome offline libraries -->
     <link rel="stylesheet" href="{% static 'assets/libraries/fontawesome-free-5.15.2-web/css/all.css' %}">
 
@@ -21,7 +24,10 @@
         <div class="">
             <nav class="navbar navbar-expand-lg navbar-light bg-white">
                <div class="container-fluid">
-                    <a href="{% url 'main:home' %}" class="navbar-brand">Clays Music</a>
+                    <a href="{% url 'main:home' %}" class="navbar-brand">
+                        <img src="{% static 'custom/img/logo/clays_logo.png'  %}" width="30" alt="">
+                        Clays Music
+                    </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
                         data-bs-target="#navbarSupportedContent" 
                         aria-controls="navbarSupportedContent"
@@ -79,53 +85,27 @@
     <footer class="footer">
         <div class="footer-items">
             <div class="container">
-                <div class="row">
-                    <div class="col-3"></div>
-                    <div class="col-3">
-                        <ul class="footer-nav">
-                            <li class="footer-item">
-                                <a href="#">Home</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#">Contact</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#">About</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#">Download</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#">Login</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#">Sign Up</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-3">
-                        <ul class="footer-nav">
-                            <li class="footer-item">
-                                <a href="#">Home</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#">Contact</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#">About</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#">Download</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#">Login</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#">Sign Up</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-3"></div>
+                <div class="">
+                    <ul class="footer-nav">
+                        <li class="footer-item">
+                            <a href="#">Home</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#">Contact</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#">About</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#">Download</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#">Login</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#">Sign Up</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <p class="copyright">&copy; Clays Music&trade; 2021.</p>

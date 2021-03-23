@@ -44,6 +44,24 @@ body{
     font-weight: bold;
 }
 
+.pb-container {
+    width: 100%;
+    background-color: rgb(212, 212, 212);
+    height: 5px;
+    min-height: 5px;
+    border-radius: 2px;
+    border-bottom: rgb(160, 160, 160) 1px solid;
+  }
+  
+  .progressbar {
+    width: 0%;
+    height: 4px;
+    background-color: cornflowerblue;
+    border-radius: 2px;
+    border-top: rgb(231, 221, 177) 1px solid;
+  }
+
+
 
 
 

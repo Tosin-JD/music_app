@@ -4,8 +4,22 @@
     <div class="">
         {% for track in track_list %}
             <li>{{ track.title }}</li>
+
+            <img src="{{ track.song_cover.url }}" alt="" />
+
+            {{ track.title }}
+
+            {{ track.artiste }}
+            <audio controls>
+                <source src="{{ track.get_audio_url }}" type="audio/mp3" />
+            </audio>
+            {{ track.description }}
+
+            {{ track.get_likes }}
         {% endfor %}
     </div>
+
+    
 {% endblock %}
 
 

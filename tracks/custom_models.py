@@ -2,12 +2,14 @@
 custom model for audio field
 """
 
-
 import os
+import wave
+from mutagen.mp3 import MP3
+from django.conf import settings
+import contextlib
 from django.db.models.fields.files import FieldFile, FileField
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-
 
 
 class AudioFieldFileHandler(FieldFile):
@@ -31,12 +33,31 @@ class AudioFieldFileHandler(FieldFile):
         self._require_file
         file = self.storage
         if self:
-            if self.size > 7*1024*1024:
+            if self.size > 6*1024*1024:
                 raise ValidationError("Audio file too large ( greater than 7mb )")
             if not os.path.splitext(self.name)[1] in [".mp3",".wav"]:
                 raise ValidationError("Doesn't have proper extension")
         else:
             raise ValidationError("Coldn't read uploaded file")
+
+    @property
+    def duration(self):
+        self._require_file
+        audio = MP3(self)
+        print(audio.info.length)
+        song_duration = audio.info.length /60 - 0.12
+        song_duration = format(song_duration, '.2f')
+        result = '{}:{}'.format(song_duration[0], song_duration[2:])
+        return result
+        
+    @property
+    def size(self):
+        try:
+            audio_size = super().size / (1024 * 1024)
+        except:
+            print("File not found")
+        else:
+            return audio_size
     
     def save(self, *args, **kwargs):
         self._check_audio_file()
