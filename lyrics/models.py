@@ -10,7 +10,7 @@ User = get_user_model()
 # Create your models here.
 class Lyric(models.Model):
     unique_num = models.UUIDField(default=uuid.uuid4, unique=True)
-    uploaded_by = models.models.ForeignKey(User, on_delete=models.SET_NULL)
+    uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE)
     track = models.OneToOneField(Track, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=144)
     slug = models.SlugField(blank=True)

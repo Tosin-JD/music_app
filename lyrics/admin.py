@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .model import (Lyric,
+from .models import (Lyric,
                     Chorus,
                     Verse,
                     Bridge,
