@@ -40,10 +40,13 @@ body{
 }
 .hero-text h1{
     color: white;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold;
+    padding: 15px;
 }
 
+/* ===================================================== */
+/* progressbar section */
 .pb-container {
     width: 100%;
     background-color: rgb(212, 212, 212);
@@ -60,6 +63,137 @@ body{
     border-radius: 2px;
     border-top: rgb(231, 221, 177) 1px solid;
   }
+/* end progressbar section */
+/* ===================================================== */
+
+/* ===================================================== */
+/* song section */
+
+.song-title, .song-artiste, .song-size, .song-duration{
+    font-size: 0.8rem;
+}
+.song-title, .song-artiste{
+    color: grey;
+}
+.song-size, .song-duration{
+    color: lightgrey;
+}
+
+.playsong, .like-song{
+    color: grey;
+}
+/* end song play section */
+/* ===================================================== */
+
+/* ===================================================== */
+/* main section */
+.main{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}   
+
+.left-side{
+    border-right: 1px solid lightgrey;
+}
+.left-side, .center-side, .right-side{
+    padding-top: 12px;
+}
+.left-side ul, .right-side ul{
+    list-style-type: none;
+}
+.right-side{
+    border-left: 1px solid rgb(231, 231, 231);
+}
+
+/* end main section */
+/* ===================================================== */
+/* ===================================================== */
+/* breadcrumb */
+
+.breadcrumb{
+    color: white;
+    padding: 10px 30px;
+    background-color: rgb(206, 206, 206);
+}
+
+/* end breadcrumb */
+
+
+/* ===================================================== */
+/* ===================================================== */
+.song-image-detail{
+    margin: 5px;
+    padding: 0;
+}
+.song-metadata-detail{
+    margin: 5px;
+    padding: 0;
+    list-style-type: none;
+    color: grey;
+    border: grey 1px solid;
+    border-radius: 3px;
+}
+
+.song-metadata-detail li{
+    padding: 5px 10px;
+}
+.song-metadata-detail li:nth-child(2n){
+    background-color: rgb(228, 228, 228);
+}
+.song-metadata-detail li:nth-child(2n+1) {
+  background-color: rgb(206, 206, 206);
+}
+
+/* ===================================================== */
+/* ===================================================== */
+/* comments */
+
+.comments, .related-details{
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.related-details{
+    height: 100%;
+    overflow-y: scroll;
+}
+/* end comments */
+/* ===================================================== */
+/* ===================================================== */
+/* footer section */
+#footer-hr{
+   margin: 0;
+}
+
+.footer-item{
+    
+}
+.footer-items ul{
+    list-style-type: none;
+}
+
+.footer-item{
+    list-style-type: none;
+    padding: 5px 15px;
+    display: inline;
+}
+.footer-item a{
+    text-decoration: none;
+    color: rgb(175, 175, 175);
+}
+
+.footer-item a:hover{
+    text-decoration:dotted;
+    color: grey;
+}
+
+.copyright{
+    margin: 0px 10px;
+    color: rgb(175, 175, 175);
+}
+
+/* ===================================================== */
 
 
 

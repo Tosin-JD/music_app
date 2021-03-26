@@ -97,6 +97,44 @@ def like_unlike_song(request, slug):
     return HttpResponseRedirect(reverse('tracks:detail', args=(track.slug, )))
 
 
+class CreateComment(generic.CreateView):
+    model = Comment
+    fields = ('text',)
+    
+    def get_success_url(self):
+        return reverse_lazy('tracks:single', args=[self.object.track.slug])
+
+    def get_context_data(self, **kwargs):
+        self.track = get_object_or_404(Track, id=self.kwargs['country_id'])
+        kwargs['track'] = self.track
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        self.track = get_object_or_404(Track, slug=self.kwargs['slug'])
+        form.instance.user = self.request.user
+        form.instance.track = self.track
+        messages.success(self.request, 'Your comment has been successfully added, thank you') 
+        return super(CreateComment, self).form_valid(form)
+
+class DetailComment(generic.DetailView):
+    model = Comment
+    fields = ('text',)
+    
+
+class UpdateComment(generic.UpdateView):
+    model = Comment
+    fields = ('text',)
+    
+    def get_success_url(self, kwargs):
+        return reverse_lazy('tracks:list')
+
+
+class DeleteComment(generic.DeleteView):
+    model = Comment
+
+    def get_success_url(self, kwargs):
+        return reverse_lazy('tracks:list')
+
 
 
 

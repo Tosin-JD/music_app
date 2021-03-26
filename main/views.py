@@ -10,6 +10,7 @@ class HomePage(generic.ListView):
     def get_context_data(self, *args, **kwargs):
         context = super(HomePage, self).get_context_data(*args, **kwargs)
         context['latest_tracks'] = Track.objects.all()[:5]
+        context['related_tracks'] = Track.objects.prefetch_related('genre')
         return context
 
 

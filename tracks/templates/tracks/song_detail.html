@@ -1,13 +1,72 @@
-<img src="{{ object.song_cover.url }}" alt="" />
-
-{{ object.title }}
-
-{{ object.artiste }}
-<audio controls>
-    <source src="{{ object.get_audio_url }}" type="audio/mp3" />
-</audio>
-{{ object.description }}
-
-{{ object.get_likes }}
+{% extends 'tracks/base.html' %}
 
 
+{% block title %}
+    {{ object.title }}|
+{% endblock %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item active" aria-current="page">{{ object.title }}</li>
+{% endblock %}
+
+{% block song_content %}
+
+    <div class="container pt-3">
+        <section>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div class="col-sm-6 mx-auto py-auto">
+                            <img class="song-image-detail img-fluid img-thumbnail" 
+                                src="{{ object.song_cover.url }}" alt="" />
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="song-metadata-detail">
+                                <li><b>Uploaded by: </b>{{ object.uploaded_by }}</li>
+                                <li><b>Song Title: </b>{{ object.title }}</li>
+                                <li><b>Artiste: </b>{{ object.artiste }}</li>
+                                <li><b>Duration: </b>{{ object.get_audio_duration }}</li>
+                                <li><b>Audio Size: </b>{{ object.get_audio_size }}</li>
+                                <li><b>Genre: </b>{{ object.genre }}</li>
+                                <li><b>Since: </b>{{ object.timestamp|date }}</li>
+                                <li><b>Description: </b>{{ object.description }}</li>
+                                <li><b>Likes: </b>{{ object.get_likes }}</li>
+                                <audio>
+                                    <source class="song-src" 
+                                    src="{{ object.get_audio_url }}" type="audio/mp3" />
+                                </audio>
+                    
+                            </ul>
+                        </div>
+                        <div class="col-sm-12 bg-light">
+                            <div class="comments">
+                                <h3>Comments</h3>
+                                <form action="{% url 'tracks:comment' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="text" name="text" class="mx-2 my-2">
+                                    <input type="submit" value="Post" class="mx-2 my-2">                                
+                                </form>
+
+                                <div class="mt-3">
+                                    {% for comment in object.comment_set.all %}
+                                        <div class="card card-body mb-1">
+                                            {{ comment }}<small>comment.timestamp</small>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="related-details bg-secondary">
+                        <div class="">
+                            <h3>Related Songs</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    </div>
+
+{% endblock %}

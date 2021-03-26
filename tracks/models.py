@@ -9,7 +9,15 @@ from django.utils.text import slugify
 # get the global user model
 User = get_user_model()
 
+
 # Create your models here.
+class Genre(models.Model):
+    name = models.CharField(max_length=10)
+    
+    def __str__(self):
+        return self.name
+
+
 class Album(models.Model):
     unique_num = models.CharField(max_length=1024)
     uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -36,7 +44,7 @@ class Track(models.Model):
     uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     artiste = models.CharField(max_length=50)
-    genre = models.CharField(max_length=20)
+    genre = models.ManyToManyField(Genre)
     description = models.CharField(max_length=1024)
     song_cover = models.ImageField(upload_to='song_covers/')
     audio_file = custom_models.AudioFileField(upload_to='tracks/')
@@ -105,6 +113,12 @@ class Track(models.Model):
             self.slug = slugify(slug_item)
         super().save(*args, **kwargs)
     
+class Link(models.Model):
+    track = models.ForeignKey(Track, on_delete=models.CASCADE)
+    name = models.CharField(max_length=30)
+    link = models.URLField(max_length=512)
+
+
 class AlbumTrack(Track):
     owner_album = models.ForeignKey('Album', on_delete=models.CASCADE)
 
@@ -121,10 +135,22 @@ class Like(models.Model):
 
 class Comment(models.Model):
     """model for comments that users make on a song"""
-    passtrack = models.ForeignKey(Track, on_delete=models.CASCADE)
+    unique_num = models.UUIDField(default=uuid.uuid4, unique=True)
+    track = models.ForeignKey(Track, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.CharField(max_length=1024)
+    slug = models.SlugField(blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     
+    def __str__(self):
+        return '{} by {}'.format(self.text, self.user)
+        
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(unique_num)
+        super().save(*args, **kwargs)
+    
+
+
     
     

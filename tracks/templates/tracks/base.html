@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+<!-- title -->
+{% block title_content %}
+        {% block title %}
+        {% endblock %}Tracks| 
+{% endblock %} 
+
+
+<!-- main body -->
+{% block main_content %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'main:home' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'tracks:list' %}">Tracks</a></li>
+        {% block breadcrumb %}
+        {% endblock %}
+        </ol>
+    </nav>
+    {% block song_content %}
+    {% endblock %}        
+{% endblock %}        
+
+
+
+

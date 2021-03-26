@@ -130,11 +130,6 @@ class SongPlayer{
                 this.currentSong
             );
 
-        console.log(this.currentSong.currentTime);
-        console.log(this.currentSong.duration);
-
-        console.log(this.getProgressBarElement());
-        
     }
 } // end SongPlayer
 

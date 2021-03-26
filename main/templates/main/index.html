@@ -18,24 +18,26 @@
                     <div class="col-md-4"></div>
                 </div>
             </div>
-            <div class="hero-text">
-                <h1 class="mx-3 my-1">
-                    Trending tracks on Clays
-                </h1>
-            </div>
         </div>
     </section>
     <main class="main" id="main">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-2">
+                <div class="col-sm-2 left-side">
                     <aside>
-
+                        <ul class="">
+                            <li>Search</li>
+                            <li>Create Playlist</li>
+                            <li>Favourite</li>
+                            
+                            <li>Create Playlist</li>
+                            <li>Profile</li>
+                        </ul>
                     </aside>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-8 center-side">
                     <div class="row">
-                    {% for track in object_list %}
+                    {% for track in latest_tracks %}
                        
                             <!-- start a single song -->
                             <div class="col-lg-3 col-md-4">                                    
@@ -72,8 +74,8 @@
                                                                 </span>
                                                             </div>
                                                             <div class="col-2">
-                                                                <a href="" class="song-like">
-                                                                    <i class="fas fa-thumbs-up like-song"></i>
+                                                                <a href="{% url 'tracks:like' track.slug %}" class="song-like">
+                                                                    <i class="fas fa-thumbs-up like-song"><small>{{ tracks.get_likes }}</small></i>
                                                                 </a>
                                                             </div>
                                                             
@@ -103,9 +105,21 @@
                     {% endfor %}
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-2 right-side">
                     <aside>
-
+                        <!-- songs related to the song that is currently playing-->
+                        <ul>
+                            {% for rel_track in related_tracks %}
+                                <li class="mb-3 mx-3">
+                                    <a href="{% url 'tracks:single' rel_track.slug %}">
+                                        <img src="{{ rel_track.song_cover.url }}" 
+                                            alt="song image"class="img-fluid rounded">
+                                    </a>
+                                    <div class="song-title">{{ rel_track.title }}</div>
+                                    <div class="song-artiste">{{ rel_track.artiste }}</div>
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </aside>
                 </div>
             </div>
