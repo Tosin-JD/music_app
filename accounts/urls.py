@@ -1,6 +1,9 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from .views import SignUp, Profile
+from .views import login_page_view
+
+from .views import UserAPIView, RegisterUserAPIView
 
 app_name = 'accounts'
 
@@ -13,4 +16,8 @@ urlpatterns = [
         name='login'
         ),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+
+    path('new-login/', login_page_view, name='new_login'),
+    path('users/', UserAPIView.as_view(), name='user_api'),
+    path('register',RegisterUserAPIView.as_view(), name='register-api'),
 ]

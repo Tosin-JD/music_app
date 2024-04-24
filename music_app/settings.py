@@ -42,14 +42,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
     'rest_framework',
+    "rest_framework.authtoken",
     'accounts',
     'main',
     'lyrics',
     'search',
     'tracks',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -149,4 +150,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # user model 
 AUTH_USER_MODEL = 'accounts.User'
 
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 
+# default automatic field
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+   'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAdminUser',
+   ),
+}
